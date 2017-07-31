@@ -4,7 +4,7 @@ class AddFishForm extends React.Component {
 
 createF(event){
 	event.preventDefault();
-	// alert('fish')
+
 
 const fruit={
 	name:this.name.value,
@@ -14,12 +14,15 @@ const fruit={
 	image:this.image.value,
 }
 console.log(fruit)
+
+this.props.addF(fruit);
+this.fishForm.reset();
 }
 
 	render(){
 		return (
 	
-<form className="fish-edit" onSubmit={(e)=>this.createF(e)}>
+<form ref={(input)=>this.fishForm=input}className="fish-edit" onSubmit={(e)=>this.createF(e)}>
 <input  ref={(input)=>this.name = input}type="text" placeholder="Fruit Name"/>
 <input  ref={(input)=>this.price = input}type="text" placeholder="Fruit Price"/>
 <select>
