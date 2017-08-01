@@ -13,6 +13,8 @@ constructor(){
 	this.loadSamples=this.loadSamples.bind(this);
 	this.addToOrder=this.addToOrder.bind(this);
 	this.updateFruit=this.updateFruit.bind(this);
+	this.removeF=this.removeF.bind(this);
+	this.removeFromOrder=this.removeFromOrder.bind(this);
 	//get initialState
 	this.state={
 		fruits:{},
@@ -68,6 +70,12 @@ updateFruit(key,updatedFruit){
 }
 
 
+removeF(key){
+const fruits={...this.state.fruits};
+fruits[key]=null;
+this.setState({fruits})
+}
+
 loadSamples(){
 this.setState({
 	fruits:sampleFruits
@@ -81,6 +89,14 @@ addToOrder(key){
 	order[key]=order[key]+1 ||1;
 	this.setState({order});
 }
+
+removeFromOrder(key){
+const order ={...this.state.order};
+delete order[key];
+this.setState({order})
+
+}
+
 
 
 	render(){
@@ -106,11 +122,14 @@ addToOrder(key){
 			fruits={this.state.fruits} 
 			order={this.state.order}
 			params={this.props.params}
+			removeFromOrder={this.removeFromOrder}
 			 />
 				<Inventory addF={this.addF}  
 				loadSamples={this.loadSamples}
 				fruits={this.state.fruits}
-				updateFruit={this.updateFruit}/> 
+				updateFruit={this.updateFruit}
+				removeF={this.removeF}
+				/> 
 	
 		</div>
 			)

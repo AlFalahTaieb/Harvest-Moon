@@ -35,7 +35,7 @@ renderInventory(key){
 		<textarea type="text" name="desc" value={fruit.desc} placeholder="Fruit Desc" onChange={(e)=>this.handleChange(e,key)}/>
 		<input type="text" name="image" value={fruit.image} placeholder="Fruit Image" onChange={(e)=>this.handleChange(e,key)}/>
 
-
+<button onClick={()=>this.props.removeF(key)}>Remove Fruit</button>
 		</div>
 		)
 }
