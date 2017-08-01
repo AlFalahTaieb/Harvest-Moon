@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from './Header';
 import Order from './Order';
-import Inventory from './Inventory'
-import sampleFruits from '../sample-fruits'
-import Fruit from './Fruit'
-
+import Inventory from './Inventory';
+import sampleFruits from '../sample-fruits';
+import Fruit from './Fruit';
+import base from '../base';
 class Appl extends React.Component{
 constructor(){
 	super();
@@ -17,6 +17,17 @@ constructor(){
 		fruits:{},
 		order:{}
 	}
+}
+
+componentWillMount(){
+	this.ref=base.syncState(`${this.props.params.storeId}/fruits`,
+	{
+		context:this,
+		state:'fruits'
+	});
+}
+componentWillUnmount(){
+	base.removeBinding(this.ref);
 }
 
 addF(fruit){
