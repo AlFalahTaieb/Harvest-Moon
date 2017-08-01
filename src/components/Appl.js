@@ -11,6 +11,7 @@ constructor(){
 
 	this.addF=this.addF.bind(this);
 		this.loadSamples=this.loadSamples.bind(this);
+			this.addToOrder=this.addToOrder.bind(this);
 	//get initialState
 	this.state={
 		fruits:{},
@@ -35,6 +36,14 @@ this.setState({
 });
 }
 
+addToOrder(key){
+	//copier state
+	const order ={...this.state.order};
+	//update
+	order[key]=order[key]+1 ||1;
+	this.setState({order});
+}
+
 
 	render(){
 
@@ -47,12 +56,15 @@ this.setState({
 	{
 		Object
 		.keys(this.state.fruits)
-					.map(key=><Fruit  key={key} details={this.state.fruits[key]}/>)
+					.map(key=><Fruit  key={key}  index ={key} details={this
+						.state.fruits[key]}
+						addToOrder={this.addToOrder}
+						/>)
 				}
 		</ul>
 				
 		</div>
-			<Order />
+			<Order fruits={this.state.fruits} order={this.state.order} />
 				<Inventory addF={this.addF}  
 				loadSamples={this.loadSamples}/> 
 	
