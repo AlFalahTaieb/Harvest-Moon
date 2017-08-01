@@ -10,8 +10,9 @@ constructor(){
 	super();
 
 	this.addF=this.addF.bind(this);
-		this.loadSamples=this.loadSamples.bind(this);
-			this.addToOrder=this.addToOrder.bind(this);
+	this.loadSamples=this.loadSamples.bind(this);
+	this.addToOrder=this.addToOrder.bind(this);
+	this.updateFruit=this.updateFruit.bind(this);
 	//get initialState
 	this.state={
 		fruits:{},
@@ -20,14 +21,32 @@ constructor(){
 }
 
 componentWillMount(){
+	//befre rendering the app 
 	this.ref=base.syncState(`${this.props.params.storeId}/fruits`,
 	{
 		context:this,
 		state:'fruits'
 	});
+//check
+
+const localStorageRef=localStorage.getItem(`order-${this.
+	props.params.storeId}`);
+
+if (localStorageRef){
+	this.setState({
+		order:JSON.parse(localStorageRef)
+	});
+}
+
+
 }
 componentWillUnmount(){
 	base.removeBinding(this.ref);
+}
+
+componentUpdate(nextProps, nextState){
+localStorage.setItem(`order-${this.props.params.storeId}`,
+JSON.stringify(nextState.order))
 }
 
 addF(fruit){
@@ -40,6 +59,14 @@ fruits[`fruit-${timestamp}`]=fruit;
 //set State
 this.setState({fruits})
 }
+
+
+updateFruit(key,updatedFruit){
+	const fruits={...this.state.fruits};
+	fruits[key]=updatedFruit;
+	this.setState({fruits});
+}
+
 
 loadSamples(){
 this.setState({
@@ -67,17 +94,23 @@ addToOrder(key){
 	{
 		Object
 		.keys(this.state.fruits)
-					.map(key=><Fruit  key={key}  index ={key} details={this
-						.state.fruits[key]}
+					.map(key=><Fruit  key={key}  index ={key} 
+						details={this.state.fruits[key]}
 						addToOrder={this.addToOrder}
 						/>)
 				}
 		</ul>
 				
 		</div>
-			<Order fruits={this.state.fruits} order={this.state.order} />
+			<Order 
+			fruits={this.state.fruits} 
+			order={this.state.order}
+			params={this.props.params}
+			 />
 				<Inventory addF={this.addF}  
-				loadSamples={this.loadSamples}/> 
+				loadSamples={this.loadSamples}
+				fruits={this.state.fruits}
+				updateFruit={this.updateFruit}/> 
 	
 		</div>
 			)
