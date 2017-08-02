@@ -55,4 +55,15 @@ renderInventory(key){
 			)
 	}
 }
+
+Inventory.propTypes={
+fruits:React.PropTypes.object.isRequired,
+updateFruit:React.PropTypes.func.isRequired,
+removeF:React.PropTypes.func.isRequired,
+addF:React.PropTypes.func.isRequired,
+loadSamples:React.PropTypes.func.isRequired
+
+};
+
+
 export default Inventory;

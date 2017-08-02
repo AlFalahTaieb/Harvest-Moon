@@ -136,4 +136,10 @@ this.setState({order})
 	}
 }
 
+Appl.propTypes={
+	params:React.PropTypes.object.isRequired,
+	//toujours mettre après isRequired,
+}
+
+
 export default Appl;

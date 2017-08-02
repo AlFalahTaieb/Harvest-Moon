@@ -23,4 +23,10 @@ return (
 	}
 }
 
+Fruit.propTypes={
+	details:React.PropTypes.object.isRequired,
+	index:React.PropTypes.string.isRequired,
+	addToOrder:React.PropTypes.func.isRequired,
+}
+
 export default Fruit;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatPrice } from '../helpers'
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Order extends React.Component {
 
@@ -40,18 +41,34 @@ renderOrder(key){
 		return (
 			<div className="order-wrap">
 				<h2>Your Order</h2>
-				<ul className="order">
+
+
+
+				<CSSTransitionGroup 
+				component="ul"
+				transitionName="order"
+				transitionEnterTimeout={600}
+				transitionLeaveTimeout={600}
+				className="order">
 				{orderIds.map(this.renderOrder)}
 					<li className="total">
 					<strong>Total:</strong>
 		{formatPrice(total)}
 		</li>
-				</ul>
+				</CSSTransitionGroup>
 				
 		
 			</div>
 			)
 	}
 }
+
+
+//Controle de saisi 
+Order.propTypes={
+fruits:React.PropTypes.object.isRequired,
+order:React.PropTypes.object .isRequired,
+removeFromOrder:React.PropTypes.func.isRequired
+};
 
 export default Order;
