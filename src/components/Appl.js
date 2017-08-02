@@ -22,6 +22,9 @@ constructor(){
 	}
 }
 
+
+
+
 componentWillMount(){
 	//befre rendering the app 
 	this.ref=base.syncState(`${this.props.params.storeId}/fruits`,
@@ -129,6 +132,7 @@ this.setState({order})
 				fruits={this.state.fruits}
 				updateFruit={this.updateFruit}
 				removeF={this.removeF}
+				storeId={this.props.params.storeId}
 				/> 
 	
 		</div>
@@ -138,6 +142,7 @@ this.setState({order})
 
 Appl.propTypes={
 	params:React.PropTypes.object.isRequired,
+
 	//toujours mettre après isRequired,
 }
 
